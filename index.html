@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUPRA Connect - Ihre Anfrage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #c29958 0%, #a67c52 100%);
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 48px;
+            font-weight: 900;
+            color: #1a1a1a;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 20px;
+            color: #2d2d2d;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .form-container {
+            padding: 40px;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .intro h2 {
+            font-size: 28px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+        
+        .intro p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #c29958;
+            box-shadow: 0 0 0 3px rgba(194, 153, 88, 0.1);
+        }
+        
+        input::placeholder {
+            color: #999;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #c29958 0%, #a67c52 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(194, 153, 88, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 12px;
+            background: #f8f8f8;
+        }
+        
+        /* Danke-Seite */
+        .thank-you-page {
+            display: none;
+            text-align: center;
+            padding: 60px 40px;
+        }
+        
+        .thank-you-page.show {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .checkmark {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c29958 0%, #a67c52 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        .checkmark svg {
+            width: 60px;
+            height: 60px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            animation: drawCheck 0.8s ease 0.3s forwards;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+        }
+        
+        .thank-you-page h1 {
+            font-size: 36px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+        
+        .thank-you-page p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .thank-you-highlight {
+            background: linear-gradient(135deg, #c29958 0%, #a67c52 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-weight: bold;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">CUPRA</div>
+            <div class="tagline">CONNECT</div>
+        </div>
+        
+        <div class="form-container" id="formSection">
+            <div class="intro">
+                <h2>Interessiert an CUPRA Connect?</h2>
+                <p>Füllen Sie das Formular aus und wir melden uns bei Ihnen mit allen Details zu den Connect-Paketen.</p>
+            </div>
+            
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="vorname">Vorname *</label>
+                    <input type="text" id="vorname" name="vorname" placeholder="Max" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nachname">Nachname *</label>
+                    <input type="text" id="nachname" name="nachname" placeholder="Mustermann" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-Mail-Adresse *</label>
+                    <input type="email" id="email" name="email" placeholder="max.mustermann@email.de" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefon">Telefonnummer *</label>
+                    <input type="tel" id="telefon" name="telefon" placeholder="+49 123 456789" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="geburtsdatum">Geburtsdatum *</label>
+                    <input type="date" id="geburtsdatum" name="geburtsdatum" required>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span id="btnText">Anfrage senden</span>
+                    <span id="btnLoading" style="display: none;" class="loading"></span>
+                </button>
+            </form>
+        </div>
+        
+        <div class="thank-you-page" id="thankYouPage">
+            <div class="checkmark">
+                <svg viewBox="0 0 52 52">
+                    <polyline points="14 27 22 35 38 19"/>
+                </svg>
+            </div>
+            <h1>Vielen Dank für Ihr Vertrauen!</h1>
+            <p>Ihre Anfrage wurde erfolgreich übermittelt.</p>
+            <p>Wir werden uns schnellstmöglich bei Ihnen melden, um Sie ausführlich über CUPRA Connect zu informieren.</p>
+            <div class="thank-you-highlight">
+                Unser Team meldet sich in Kürze bei Ihnen!
+            </div>
+            <p style="color: #999; font-size: 14px;">Sie können dieses Fenster nun schließen.</p>
+        </div>
+        
+        <div class="footer">
+            CUPRA Connect – Ihr Auto. Ihre App. Ihre Freiheit.
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // EmailJS initialisieren
+        emailjs.init('RQW1N9nhVS-wFPJih');
+        
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            
+            // Button auf "Wird gesendet..." setzen
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline-block';
+            
+            // Formulardaten sammeln
+            const formData = {
+                vorname: document.getElementById('vorname').value,
+                nachname: document.getElementById('nachname').value,
+                email: document.getElementById('email').value,
+                telefon: document.getElementById('telefon').value,
+                geburtsdatum: document.getElementById('geburtsdatum').value,
+                to_email: 'n.testobject@gmail.com'
+            };
+            
+            // E-Mail senden mit EmailJS
+            emailjs.send('service_iyqgdfn', 'template_5lpj3p8', formData)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    
+                    // Bestätigungs-E-Mail an den Kunden senden
+                    emailjs.send('service_iyqgdfn', 'template_oj4ovhj', formData)
+                        .then(function(response) {
+                            console.log('Bestätigung gesendet!', response.status);
+                        }, function(error) {
+                            console.log('Bestätigung fehlgeschlagen', error);
+                        });
+                    
+                    showThankYouPage();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Es gab ein Problem beim Senden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt.');
+                    submitBtn.disabled = false;
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                });
+        });
+        
+        function showThankYouPage() {
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('thankYouPage').classList.add('show');
+        }
+    </script>
+</body>
+</html>
