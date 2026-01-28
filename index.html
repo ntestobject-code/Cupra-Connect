@@ -284,6 +284,11 @@
                     <input type="date" id="geburtsdatum" name="geburtsdatum" required>
                 </div>
                 
+                <div class="form-group">
+                    <label for="fahrgestellnummer">Fahrgestellnummer (FIN) *</label>
+                    <input type="text" id="fahrgestellnummer" name="fahrgestellnummer" placeholder="VSSZZZ6RZHR123456" required maxlength="17">
+                </div>
+                
                 <button type="submit" class="submit-btn" id="submitBtn">
                     <span id="btnText">Anfrage senden</span>
                     <span id="btnLoading" style="display: none;" class="loading"></span>
@@ -335,6 +340,7 @@
                 email: document.getElementById('email').value,
                 telefon: document.getElementById('telefon').value,
                 geburtsdatum: document.getElementById('geburtsdatum').value,
+                fahrgestellnummer: document.getElementById('fahrgestellnummer').value,
                 to_email: 'n.testobject@gmail.com'
             };
             
